@@ -103,7 +103,7 @@ listOfFeesNotCalculed = [
   }
 ];
 
-codeTbleFeeds = '<table dir="rtl" style="width:100%; border-collapse:collapse; font-family:system-ui, Arial, sans-serif;">' +
+codeTbleFeeds = '<table dir="ltr" style="width:100%; border-collapse:collapse; font-family:system-ui, Arial, sans-serif;">' +
   '<colgroup>' +
   '  <col style="width:34%;">' +
   '  <col style="width:33%;">' +

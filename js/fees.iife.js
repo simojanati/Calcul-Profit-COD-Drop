@@ -29,7 +29,7 @@ window.App = window.App || {};
 
     console.log(currencyLogo);
     callCenterExtra.innerHTML = '' + codeTbleFeeds + '<tr>' +
-      '  <th style="text-align:right; padding:8px 10px; font-weight:600; font-size:8px;">Gadgets</th>' +
+      '  <th style="text-align:left; padding:8px 10px; font-weight:600; font-size:8px;">Gadgets</th>' +
       '  <td style="text-align:center; padding:8px 10px;">' +
       '    <span id="leadGadVal">' + extraFees.gadgetCallCenterLead + '</span> <span>' + currencyLogo + '</span>' +
       '  </td>' +
@@ -38,7 +38,7 @@ window.App = window.App || {};
       '  </td>' +
       '</tr>' +
       '<tr>' +
-      '  <th style="text-align:right; padding:8px 10px; font-weight:600; font-size:8px;">Cosmetics</th>' +
+      '  <th style="text-align:left; padding:8px 10px; font-weight:600; font-size:8px;">Cosmetics</th>' +
       '  <td style="text-align:center; padding:8px 10px;">' +
       '    <span id="leadCosVal">' + extraFees.cosmeticCallCenterLead + '</span> <span>' + currencyLogo + '</span>' +
       '  </td>' +
