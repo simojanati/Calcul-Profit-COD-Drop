@@ -446,6 +446,7 @@ select.control {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -461,6 +462,10 @@ select.control {
 }
 
 @media (max-width: 768px) {
+  .dropdowns.conv-row {
+    justify-content: normal !important;
+  }
+
   .dropdowns.conv-row select {
     flex-basis: 130px;
     min-width: 110px;
