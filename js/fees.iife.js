@@ -114,15 +114,15 @@ window.App = window.App || {};
     if (totalProfit > 0) {
       resultCalculEl.style.backgroundColor = '#006e12ff';
       resultCalculEl.style.color = '#ffffffff';
-      resultCalculEl.innerHTML = 'Profit = ' + totalProfit.toFixed(2) + ' $ || ' + profitMad.toFixed(2) + ' MAD';
+      resultCalculEl.innerHTML = 'هامش الربح = Profit Margin = ' + totalProfit.toFixed(2) + ' $ || ' + profitMad.toFixed(2) + ' MAD';
     } else if (totalProfit < 0) {
       resultCalculEl.style.backgroundColor = '#ff0000ff';
       resultCalculEl.style.color = '#ffffffff';
-      resultCalculEl.innerHTML = 'Profit = ' + totalProfit.toFixed(2) + ' $ || ' + profitMad.toFixed(2) + ' MAD';
+      resultCalculEl.innerHTML = 'هامش الربح = Profit Margin = ' + totalProfit.toFixed(2) + ' $ || ' + profitMad.toFixed(2) + ' MAD';
     } else {
       resultCalculEl.style.backgroundColor = '#e9b200ff';
       resultCalculEl.style.color = '#000000ff';
-      resultCalculEl.innerHTML = 'Profit = 00 $ || 00 MAD';
+      resultCalculEl.innerHTML = 'هامش الربح = Profit Margin = 00 $ || 00 MAD';
     }
 
   };
@@ -131,7 +131,7 @@ window.App = window.App || {};
 
 window.App = window.App || {};
 (function (App) {
-  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, fees, errorEl,convertToUSD, convertFromUSDToMarket) {
+  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, fees, errorEl, convertToUSD, convertFromUSDToMarket) {
     function showErr(msg) {
       if (!errorEl) return;
       errorEl.textContent = msg;
@@ -181,7 +181,7 @@ window.App = window.App || {};
       var cur = (document.getElementById('currencyMarket') && document.getElementById('currencyMarket').textContent) || '';
       resultEl.style.backgroundColor = '#27ae60';
       resultEl.style.color = '#fff';
-      resultEl.textContent = 'Sale Price = ' + sale_usd.toFixed(2) + ' $ || ' + sale_market.toFixed(2) + ' ' + cur;
+      resultEl.textContent = 'Sale Price = ' + sale_usd.toFixed(2) + ' $ || ' + sale_market.toFixed(2) + ' ' + cur + ' = سعر البيع ';
     }
   };
 })(window.App);

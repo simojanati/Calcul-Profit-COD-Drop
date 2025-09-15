@@ -12,6 +12,24 @@
 </head>
 
 <body>
+  <!-- Header Marquee -->
+  <div class="ticker is-ltr" aria-label="إشعار">
+    <div class="ticker__track">
+      <span class="ticker__item">
+        مرحباً بكم 👋، يمكنكم حساب ثمن بيع المنتج أو الربح الناتج عن بيع منتج بثمن معيّن (حسب السوق)،
+        من COD Network Drop. جميع الأرقام مأخوذة من الموقع الأصلي. بالنسبة لمحوّل العملات فالتحديث يكون يومياً،
+       لذلك فالنتائج تقريبية بدرجة كبيرة. شكراً لكم. 👋 || 
+      </span>
+      <img src="codnetworkbanner.gif"/>
+      <!-- نسخة ثانية لضمان تدفّق مستمر -->
+      <span class="ticker__item" aria-hidden="true">
+        مرحباً بكم 👋، يمكنكم حساب ثمن بيع المنتج أو الربح الناتج عن بيع منتج بثمن معيّن (حسب السوق)،
+        من COD Network Drop. جميع الأرقام مأخوذة من الموقع الأصلي. بالنسبة لمحوّل العملات فالتحديث يكون يومياً،
+      |لذلك فالنتائج تقريبية بدرجة كبيرة. شكراً لكم. 👋 || 
+      </span>
+      <img src="codnetworkbanner.gif"/>
+    </div>
+  </div>
 
   <div class="feetsCalcul">
     <div class="app-details">
@@ -128,7 +146,7 @@
         lead
         ... Not
         calculated in table) - <b>CPL</b> (Cost Per Lead: x3 days for test)</b></p>
-      <p id="resultCalcul" class="resultAll">الربح Profit = 00 $ || 00 MAD</p>
+      <p id="resultCalcul" class="resultAll" dir="rtl">هامش الربح = Profit = 00 $ || 00 MAD</p>
 
     </section>
 
@@ -186,7 +204,7 @@
         (CPL x 3)))
       </p>
       <p id="spd-resultCalcul" class="resultAll" aria-live="polite" dir="ltr">Sale Price = 00 $ || 00 <span
-          id="currencyResultCalculSale"></span></p>
+          id="currencyResultCalculSale"></span> = سعر البيع </p>
 
     </section>
   </div>
@@ -210,9 +228,6 @@
     <p id="result" aria-live="polite" dir="ltr"></p>
   </div>
 
-  <div class="wrapperPourcent">
-
-  </div>
 
   <input id="resultHidden" name="resultHidden" type="hidden" value="0" />
   <input id="madHidden" name="madHidden" type="hidden" value="0" />
