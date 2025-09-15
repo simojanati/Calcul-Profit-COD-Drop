@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Stylesheet-->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="./favicon.png">
+</head>
+
+<body>
+  <div class="feetsCalcul">
+    <div class="app-details">
+      <img src="DROP.gif" class="app-icon" alt="COD Drop Profit Calculator" />
+      <h1 class="app-title">Calculate Profit Of Product from COD Drop </h1>
+      <h1 class="app-title"> حساب ربح المنتج من COD Drop</h1>
+    </div>
+    <label for="market">Market:</label>
+    <!-- <input type="number" id="amount" value="Arabie Saudie" /> -->
+
+    <div class="dropdowns">
+      <select id="markets"></select>
+    </div>
+    <div class="muted">سوق العمل</div>
+    <br>
+    <!-- <table>
+      <tr>
+        <th>مركز الاتصال Call Center</th>
+        <th>الشحن Shipping</th>
+        <th>رسوم الدفع عند الاستلام COD Fees</th>
+      </tr>
+      <tr>
+        <td id="callCenterValue"></td>
+        <td id="shippingValue"></td>
+        <td id="codFeesValue"></td>
+      </tr>
+    </table> -->
+    <table class="fees-table" dir="rtl">
+      <colgroup>
+        <col class="side-col">
+        <col>
+        <col>
+        <col>
+      </colgroup>
+      <tr>
+        <th></th>
+        <th>مركز الاتصال Call Center</th>
+        <th>الشحن Shipping</th>
+        <th>رسوم الدفع عند الاستلام COD Fees</th>
+      </tr>
+      <tr>
+        <th scope="row">محسوب Calculated</th>
+        <td id="callCenterValue" style="direction: ltr;"></td>
+        <td id="shippingValue" style="direction: ltr;"></td>
+        <td id="codFeesValue" style="direction: ltr;"></td>
+      </tr>
+      <tr>
+        <th scope="row">غير محسوب Not Calculated</th>
+        <td id="callCenterExtra" style="font-size: 10px;"></td>
+        <td id="shippingExtra" style="direction: ltr;"></td>
+        <td id="codFeesExtra" style="direction: ltr;"></td>
+      </tr>
+    </table>
+
+    <br>
+    <div class="wrap">
+      <h1 style="text-align: center;">المرجو إدخال معلوماتك في الخانات أسفله</h1><br>
+      <div class="grid">
+        <!-- 1) Type Product (dropdown) -->
+        <div class="field">
+          <label for="type">اختر الفئة: Gadget أو Cosmetict</label>
+          <select id="type" name="type" class="control" required>
+            <option value="" disabled selected>اختر نوع…</option>
+            <option value="Gadget">Gadget</option>
+            <option value="Cosmetic">Cosmetic</option>
+          </select>
+          <div class="muted">Product Type</div>
+        </div>
+
+        <!-- 2) prix vente (decimal + SAR suffix on right) -->
+        <div class="field">
+          <label for="salePrice">سعر البيع </label>
+          <div class="affix">
+            <input id="salePrice" name="salePrice" class="control" type="number" inputmode="decimal" step="0.01" min="0"
+              placeholder="0.00" dir="ltr" required />
+            <span class="suffix" id="currencyMarket">SAR</span>
+          </div>
+          <div class="muted">Sale Price</div>
+        </div>
+
+        <!-- 3) Profit margin (decimal + $ suffix) -->
+        <div class="field">
+          <label for="profitMargin">تكلفة غير المتوقعة </label>
+          <div class="affix">
+            <input id="profitMargin" name="profitMargin" class="control" type="number" inputmode="decimal" step="0.01"
+              min="0" placeholder="0.00" value="15" dir="ltr" required />
+            <span class="suffix">%</span>
+          </div>
+          <div class="muted">Cost Unexpected</div>
+        </div>
+
+        <!-- 4) Prix Cost (decimal + $ suffix) -->
+        <div class="field">
+          <label for="prixCost">تكلفة الشراء</label>
+          <div class="affix">
+            <input id="prixCost" name="prixCost" class="control" type="number" inputmode="decimal" step="0.01" min="0"
+              placeholder="0.00" dir="ltr" required />
+            <span class="suffix">$</span>
+          </div>
+          <div class="muted">Cost Price</div>
+        </div>
+
+        <!-- 5) CPL (decimal + $ suffix) -->
+        <div class="field row-span-2">
+          <label for="cpl">التكلفة لكل عميل محتمل</label>
+          <div class="affix">
+            <input id="cpl" name="cpl" class="control" type="number" inputmode="decimal" step="0.01" min="0"
+              placeholder="0.00" dir="ltr" required />
+            <span class="suffix">$</span>
+          </div>
+          <div class="muted">CPL</div>
+        </div>
+
+      </div>
+    </div>
+    <p id="formError" class="error" aria-live="polite" hidden></p>
+    <button id="calcul-button">احسب Calculate </button>
+    <p id="resultDesc" style="text-align: center;font-size: 14px;"><b>Profit = SP - (CCD + SH + COD + CU +
+        (CPL x 3))</b></p>
+    <p id="resultDescExp" style="font-size: 11px;" dir="ltr"><b>SP</b> (Sale Price) - <b>CCD</b> (Fees Call Center G/C
+      Delivered) - <b>SH</b>
+      (Fees Shipping Delivered) - <b>COD</b> (Fees COD: % of SP) - <b>CU</b> (Cost Unexpected: Return, call center lead
+      ... Not
+      calculated in table) - <b>CPL</b> (Cost Per Lead: x3 days for test)</b></p>
+    <p id="resultCalcul">الربح Profit = 00 $ || 00 MAD</p>
+  </div>
+  <div class="wrapper">
+    <div class="app-details">
+      <img src="exchange.gif" class="app-icon" alt="Currency Converter" />
+      <h1 class="app-title">Currency Converter</h1>
+      <h1 class="app-title">محول العملات</h1>
+    </div>
+    <label for="amount">المبلغ Amount : </label>
+    <input type="number" id="amount" value="100" />
+    <div class="dropdowns conv-row" dir="rtl">
+      <label class="lbl" for="from-currency-select">من</label>
+      <select id="from-currency-select" class="btnFrom"></select>
+      <span class="arrow" aria-hidden="true">⬅️</span>
+      <label class="lbl" for="to-currency-select">إلى</label>
+      <select id="to-currency-select" class="btnTo"></select>
+
+      <!-- <select id="to-currency-select"></select>
+      <label for="to-currency-select">إلى</label>
+      <select id="from-currency-select"></select>
+      <label for="from-currency-select">من</label> -->
+
+    </div>
+    <button id="convert-button">تحويل Convert</button>
+    <p id="result" aria-live="polite" dir="ltr"></p>
+    <input id="resultHidden" name="resultHidden" type="hidden" value="0" />
+    <input id="madHidden" name="madHidden" type="hidden" value="0" />
+    <!-- <input id="eurHidden" name="eurHidden" type="hidden" value="0" /> -->
+
+  </div>
+
+  <!-- Scipt With Array Of Markets -->
+  <!-- <script src="markets.js"></script> -->
+  <!-- Scipt With Array Of COD Feeds -->
+  <!-- <script src="allCodFees.js"></script> -->
+  <!-- Scipt With Array Of Supported Country Codes -->
+  <!-- <script src="currency-codes.js"></script> -->
+  <!-- Scipt With Array Of currency exemple -->
+  <!-- <script src="currencyUSD.js"></script> -->
+  <!-- Script with API Key -->
+  <!-- <script src="api-key.js"></script> -->
+
+  <!-- Script -->
+  <!-- <script src="./js/script.js"></script> -->
+
+  <script src="./js/currency-codes.js"></script>
+  <script src="./js/markets.js"></script>
+  <script src="./js/allCodFees.js"></script>
+
+  <script src="./js/exchange.iife.js"></script>
+  <script src="./js/fees.iife.js"></script>
+  <script src="./js/main.iife.js"></script>
+
+</body>
+
+</html>

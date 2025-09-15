@@ -1,0 +1,22 @@
+markets = [
+  { ID: "KSA", feesID: "KSA", name: "Saudi Arabia", currency: "SAR", region: "GCC" },
+  { ID: "UAE", feesID: "UAE", name: "United Arab Emirates", currency: "AED", region: "GCC" },
+  { ID: "BHR", feesID: "GCC", name: "Bahrain", currency: "BHD", region: "GCC" },
+  { ID: "OMN", feesID: "GCC", name: "Oman", currency: "OMR", region: "GCC" },
+  { ID: "KWT", feesID: "GCC", name: "Kuwait", currency: "KWD", region: "GCC" },
+  { ID: "QTR", feesID: "GCC", name: "Qatar", currency: "QAR", region: "GCC" },
+  { ID: "MAR", feesID: "MAR", name: "Morocco", currency: "MAD", region: "Afrique" },
+  { ID: "SPA", feesID: "EUR", name: "Spain", currency: "EUR", region: "Europe" },
+  { ID: "POR", feesID: "POR", name: "Portugal", currency: "EUR", region: "Europe" },
+  { ID: "CZH", feesID: "EUR", name: "Czech Republic", currency: "EUR", region: "Europe" },
+  { ID: "HUN", feesID: "EUR", name: "Hungary", currency: "EUR", region: "Europe" },
+  { ID: "SLK", feesID: "EUR", name: "Slovakia", currency: "EUR", region: "Europe" },
+  { ID: "ROM", feesID: "EUR", name: "Romania", currency: "EUR", region: "Europe" },
+  { ID: "LIT", feesID: "EUR", name: "Lituania", currency: "EUR", region: "Europe" },
+  { ID: "SLA", feesID: "EUR", name: "Slovenia", currency: "EUR", region: "Europe" },
+  { ID: "CTR", feesID: "EUR", name: "Croatia", currency: "EUR", region: "Europe" },
+  { ID: "LET", feesID: "EUR", name: "Lethonia", currency: "EUR", region: "Europe" },
+  { ID: "POL", feesID: "POL", name: "Poland", currency: "EUR", region: "Europe" },
+  { ID: "COL", feesID: "COL", name: "Colombia", currency: "COP", region: "Latam" },
+  { ID: "PAN", feesID: "PAN", name: "Panama", currency: "PAB", region: "Latam" }
+];
