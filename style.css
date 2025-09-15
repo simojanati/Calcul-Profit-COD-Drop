@@ -6,22 +6,15 @@
   --border: #e5e7eb;
   --accent: #5178FF;
   --result: #d1dbff;
-  /* تقدر تغيّر اللون لستايل Janatik */
 }
 
 * {
-  /* padding: 0;
-  margin: 0; */
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   border: none;
   outline: none;
 }
 
-/* body{
-      margin:0; padding:24px; font:15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:var(--bg); color:var(--text);
-    } */
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -44,19 +37,17 @@ body {
   gap: 16px;
 }
 
-@media (max-width:700px){
-  .grid { grid-template-columns: 1fr; }
+@media (max-width:700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-}
-
 
 .field {
   display: flex;
   flex-direction: column;
 }
 
-/* input/select base */
 .control {
   width: 100%;
   border: 1px solid var(--border);
@@ -79,14 +70,12 @@ body {
 }
 
 
-/* Affix (suffix on the right inside input) */
 .affix {
   position: relative;
 }
 
 .affix .control {
   padding-right: 64px;
-  /* نزيد مساحة للسفكس */
 }
 
 .suffix {
@@ -101,7 +90,6 @@ body {
   padding: 6px 10px;
   border-radius: 8px;
   pointer-events: none;
-  /* غير قابل للنقر */
 }
 
 .feetsCalcul {
@@ -111,6 +99,7 @@ body {
   padding: 2em;
   border-radius: 0.8em;
 }
+
 .wrapper {
   width: 100%;
   max-width: 25%;
@@ -124,6 +113,7 @@ body {
     width: 100% !important;
     max-width: none;
   }
+
   .wrapper {
     width: 100% !important;
     max-width: none;
@@ -135,10 +125,6 @@ body {
   align-items: center;
   flex-direction: column;
 }
-
-/* .app-icon {
-  width: 9.37em;
-} */
 
 .app-title {
   font-size: 1.6em;
@@ -231,9 +217,9 @@ table {
 }
 
 @media (max-width:600px) {
-table {
-  width: 100% !important;
-}
+  table {
+    width: 100% !important;
+  }
 }
 
 th,
@@ -254,49 +240,59 @@ th {
   color: #444;
 }
 
-/* يخلي CPL ياخذ جوج أعمدة فـ grid */
-.row-span-2 { grid-column: span 2; }
-
-/* أزرار داخل الفورم ما يدخلوش فـ submit غير المقصود */
-button { cursor: pointer; }
-
-/* تصغير الهاوية فالشاشات الضيقة باش الجدولين يبانوا مزيان */
-@media (max-width: 900px) {
-  .feetsCalcul, .wrapper { padding: 1.25em; }
+.row-span-2 {
+  grid-column: span 2;
 }
 
-.conv-row{
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+
+  .feetsCalcul,
+  .wrapper {
+    padding: 1.25em;
+  }
+}
+
+.conv-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  unicode-bidi: isolate; /* يعزل ترتيب الحروف داخل الكونتينر */
+  unicode-bidi: isolate;
 }
 
-/* خليه يكتب الأرقام والحروف اللاتينية من اليسار */
 .conv-row select,
-.conv-row input[type="number"]{
+.conv-row input[type="number"] {
   direction: ltr;
 }
-.btnFrom,.btnTo{
+
+.btnFrom,
+.btnTo {
   direction: rtl !important;
 }
 
-/* إذا بغيت الوسم "→" ديما واضح ومتمركز */
-.conv-row .arrow{ line-height: 1; }
-
-.error{
-  display:none;
-  margin-top:10px;
-  padding:10px 12px;
-  border-radius:10px;
-  border:1px solid #f5c2c7;
-  background:#fdecec;
-  color:#b00020;
-  font-size:14px;
+.conv-row .arrow {
+  line-height: 1;
 }
-.error.show{ display:block; }
 
-.fees-table{
+.error {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #f5c2c7;
+  background: #fdecec;
+  color: #b00020;
+  font-size: 14px;
+}
+
+.error.show {
+  display: block;
+}
+
+.fees-table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
@@ -305,11 +301,11 @@ button { cursor: pointer; }
   border-radius: 12px;
   overflow: hidden;
   font-family: system-ui, Arial, sans-serif;
-  table-layout: fixed; /* يوازن الأعمدة */
+  table-layout: fixed;
 }
 
 .fees-table th,
-.fees-table td{
+.fees-table td {
   padding: 12px 14px;
   border-bottom: 1px solid #f1f3f5;
   text-align: center;
@@ -317,141 +313,162 @@ button { cursor: pointer; }
 }
 
 .fees-table tr:last-child th,
-.fees-table tr:last-child td{
+.fees-table tr:last-child td {
   border-bottom: 0;
 }
 
-/* العمود الجانبي (الأول) */
-.fees-table .side-col{ width: 38%; }              /* عرض اللابل الجانبي */
-.fees-table th[scope="row"]{
-  text-align: right;                               /* العنوان الجانبي يمين */
-  background: #f8fafc;                             /* تمييز خفيف */
-  font-weight: 600; color: #111827; white-space: nowrap;
+.fees-table .side-col {
+  width: 38%;
 }
 
+.fees-table th[scope="row"] {
+  text-align: right;
+  background: #f8fafc;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
 
-
-/* === Responsive patch (non-breaking) === */
-
-/* Place the two main cards side-by-side on large screens, stack on small */
-body{
-  display:flex;
-  flex-wrap:wrap;
+body {
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
-  justify-content:center;
-  align-items:flex-start;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* Keep existing card widths but ensure they don't overflow */
-.feetsCalcul, .wrapper{
+.feetsCalcul,
+.wrapper {
   min-width: 260px;
 }
 
-/* Make overflowing tables scroll horizontally on small screens */
-@media (max-width: 768px){
-  .table-scroll, table{
-    display:block;
-    width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .fees-table th, .fees-table td{
-    white-space: nowrap;
-  }
-}
+@media (max-width: 768px) {
 
-/* Prevent long words/values from breaking layout */
-.content, .grid, .feetsCalcul, .wrapper, table{
-  overflow-wrap:anywhere;
-  word-break:break-word;
-}
-
-/* Ensure images scale within cards */
-img, video, canvas{
-  max-width:100%;
-  height:auto;
-}
-
-/* Better tap targets on mobile */
-button, .btn, input.control, select.control{
-  min-height: 44px;
-}
-
-/* Keep suffix chips aligned in narrow widths */
-.affix .suffix{
-  white-space:nowrap;
-}
-
-
-
-
-/* --- Responsive enhancements (patch v2) --- */
-
-/* Stack form fields on mobile cleanly */
-@media (max-width: 768px){
-  .grid { grid-template-columns: 1fr; }
-}
-
-/* Make the fees table horizontally scrollable on small screens */
-@media (max-width: 768px){
-  .fees-table{
-    display: block;              /* allow scrolling */
+  .table-scroll,
+  table {
+    display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .fees-table tr, .fees-table th, .fees-table td{
-    white-space: nowrap;         /* prevent wrapping that breaks columns */
+
+  .fees-table th,
+  .fees-table td {
+    white-space: nowrap;
   }
 }
 
-/* Optional: keep main sections stacked with spacing on mobile */
-@media (max-width: 768px){
-  body{ gap: 1rem; }
+.content,
+.grid,
+.feetsCalcul,
+.wrapper,
+table {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-
-
-/* === Mobile stacking fix for form fields (v3) === */
-@media (max-width: 768px){
-  /* one column grid for the form */
-  .grid { grid-template-columns: 1fr !important; gap: 12px; }
-
-  /* ensure each field takes full row */
-  .field { width: 100%; min-width: 0; }
-
-  /* neutralize any spanning on mobile */
-  .row-span-2 { grid-column: auto !important; }
-
-  /* make inputs comfy and avoid overlap with suffix */
-  .affix .control { width: 100%; }
-  .affix .suffix { right: 8px; }
-
-  /* optional: stack actions if they exist */
-  .actions { flex-direction: column; gap: 10px; align-items: stretch; }
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
 }
 
+button,
+.btn,
+input.control,
+select.control {
+  min-height: 44px;
+}
 
+.affix .suffix {
+  white-space: nowrap;
+}
 
-/* === Currency dropdown row: keep labels intact, let selects shrink === */
-.dropdowns.conv-row{
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .fees-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .fees-table tr,
+  .fees-table th,
+  .fees-table td {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  .field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .row-span-2 {
+    grid-column: auto !important;
+  }
+
+  .affix .control {
+    width: 100%;
+  }
+
+  .affix .suffix {
+    right: 8px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+}
+
+.dropdowns.conv-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
-.dropdowns.conv-row label{
-  white-space: nowrap;      /* ما يتقسّمش النص (من / إلى) */
+
+.dropdowns.conv-row label {
+  white-space: nowrap;
   font-weight: 600;
 }
-.dropdowns.conv-row select{
-  flex: 0 1 160px;          /* يخلي السيلكت يصغَر عند الحاجة */
+
+.dropdowns.conv-row select {
+  flex: 0 1 160px;
   min-width: 120px;
   max-width: 100%;
 }
-@media (max-width: 768px){
-  .dropdowns.conv-row select{ flex-basis: 130px; min-width: 110px; }
+
+@media (max-width: 768px) {
+  .dropdowns.conv-row select {
+    flex-basis: 130px;
+    min-width: 110px;
+  }
 }
-@media (max-width: 420px){
-  .dropdowns.conv-row select{ flex-basis: 110px; }
+
+@media (max-width: 420px) {
+  .dropdowns.conv-row select {
+    flex-basis: 110px;
+  }
 }

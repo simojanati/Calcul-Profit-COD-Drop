@@ -19,25 +19,11 @@
       <h1 class="app-title"> حساب ربح المنتج من COD Drop</h1>
     </div>
     <label for="market">Market:</label>
-    <!-- <input type="number" id="amount" value="Arabie Saudie" /> -->
-
     <div class="dropdowns">
       <select id="markets"></select>
     </div>
     <div class="muted">سوق العمل</div>
     <br>
-    <!-- <table>
-      <tr>
-        <th>مركز الاتصال Call Center</th>
-        <th>الشحن Shipping</th>
-        <th>رسوم الدفع عند الاستلام COD Fees</th>
-      </tr>
-      <tr>
-        <td id="callCenterValue"></td>
-        <td id="shippingValue"></td>
-        <td id="codFeesValue"></td>
-      </tr>
-    </table> -->
     <table class="fees-table" dir="rtl">
       <colgroup>
         <col class="side-col">
@@ -64,7 +50,6 @@
         <td id="codFeesExtra" style="direction: ltr;"></td>
       </tr>
     </table>
-
     <br>
     <div class="wrap">
       <h1 style="text-align: center;">المرجو إدخال معلوماتك في الخانات أسفله</h1><br>
@@ -123,7 +108,6 @@
           </div>
           <div class="muted">CPL</div>
         </div>
-
       </div>
     </div>
     <p id="formError" class="error" aria-live="polite" hidden></p>
@@ -151,43 +135,19 @@
       <span class="arrow" aria-hidden="true">⬅️</span>
       <label class="lbl" for="to-currency-select">إلى</label>
       <select id="to-currency-select" class="btnTo"></select>
-
-      <!-- <select id="to-currency-select"></select>
-      <label for="to-currency-select">إلى</label>
-      <select id="from-currency-select"></select>
-      <label for="from-currency-select">من</label> -->
-
     </div>
     <button id="convert-button">تحويل Convert</button>
     <p id="result" aria-live="polite" dir="ltr"></p>
     <input id="resultHidden" name="resultHidden" type="hidden" value="0" />
     <input id="madHidden" name="madHidden" type="hidden" value="0" />
-    <!-- <input id="eurHidden" name="eurHidden" type="hidden" value="0" /> -->
-
   </div>
-
-  <!-- Scipt With Array Of Markets -->
-  <!-- <script src="markets.js"></script> -->
-  <!-- Scipt With Array Of COD Feeds -->
-  <!-- <script src="allCodFees.js"></script> -->
-  <!-- Scipt With Array Of Supported Country Codes -->
-  <!-- <script src="currency-codes.js"></script> -->
-  <!-- Scipt With Array Of currency exemple -->
-  <!-- <script src="currencyUSD.js"></script> -->
-  <!-- Script with API Key -->
-  <!-- <script src="api-key.js"></script> -->
-
   <!-- Script -->
-  <!-- <script src="./js/script.js"></script> -->
-
   <script src="./js/currency-codes.js"></script>
   <script src="./js/markets.js"></script>
   <script src="./js/allCodFees.js"></script>
-
   <script src="./js/exchange.iife.js"></script>
   <script src="./js/fees.iife.js"></script>
   <script src="./js/main.iife.js"></script>
-
 </body>
 
 </html>
