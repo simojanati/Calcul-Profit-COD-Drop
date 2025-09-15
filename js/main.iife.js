@@ -69,7 +69,7 @@ window.App = window.App || {};
       var fees = tup.fees;
       var toUSD = function (v) { return App.convertUsingHidden(v, resultHidden, 'toUSD'); };
       var usdToMkt = function (v) { return App.convertUsingHidden(v, resultHidden, 'fromUSD'); };
-      App.calcSalePrice(spdType, spdPrixCost, spdCpl, spdProfitMargin, spdResult, fees, formErrorSP, usdToMkt);
+      App.calcSalePrice(spdType, spdPrixCost, spdCpl, spdProfitMargin, spdResult, fees, formErrorSP, toUSD, usdToMkt);
     }
 
     App.initMarketsDropdown(marketsSelect);

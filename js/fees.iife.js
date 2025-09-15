@@ -131,7 +131,7 @@ window.App = window.App || {};
 
 window.App = window.App || {};
 (function (App) {
-  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, fees, errorEl, convertFromUSDToMarket) {
+  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, fees, errorEl,convertToUSD, convertFromUSDToMarket) {
     function showErr(msg) {
       if (!errorEl) return;
       errorEl.textContent = msg;
@@ -152,6 +152,12 @@ window.App = window.App || {};
     }
     if (!typeEl.value) { showErr('اختَر نوع المنتج من فضلك'); return; }
     clearErr();
+
+    if (fees.feesID === 'MAR' || fees.feesID === 'EUR' || fees.feesID === 'POL' || fees.feesID === 'POR') {
+      fees.ship = convertToUSD(fees.ship);
+      fees.gadgetCallCenter = convertToUSD(fees.gadgetCallCenter);
+      fees.cosmeticCallCenter = convertToUSD(fees.cosmeticCallCenter);
+    }
 
     var type = (typeEl && typeEl.value) || '';
     var cp_usd = Number(prixCostEl.value);
