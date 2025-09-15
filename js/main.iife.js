@@ -25,13 +25,15 @@ window.App = window.App || {};
   var prixCost = document.getElementById('prixCost');
   var cpl = document.getElementById('cpl');
   var resultCalcul = document.getElementById('resultCalcul');
-  var formError = document.getElementById('formError');
+  var currencyResultCalculSale = document.getElementById('currencyResultCalculSale');
+  var formErrorP = document.getElementById('formError1');
+  var formErrorSP = document.getElementById('formError2');
 
   function refreshFeesAndRates() {
     var tup = App.getCurrentMarketAndFees(marketsSelect);
     var market = tup.market, fees = tup.fees;
 
-    App.renderFeesUI(fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarket);
+    App.renderFeesUI(fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarket, currencyResultCalculSale);
 
     App.addMarketCurrencyToHidden(market.currency, resultHidden).catch(console.error);
     App.addMadToHidden(madHidden).catch(console.error);
@@ -46,7 +48,7 @@ window.App = window.App || {};
 
     App.calculProfit(
       typeProduct, salePrice, profitMargin, prixCost, cpl, resultCalcul,
-      fees, toUSD, usdToMad, formError
+      fees, toUSD, usdToMad, formErrorP
     );
   }
 
@@ -56,6 +58,20 @@ window.App = window.App || {};
 
   // init
   document.addEventListener('DOMContentLoaded', function () {
+    // --- Sale Price Drop (second tab) ---
+    var spdType = document.getElementById('spd-type');
+    var spdPrixCost = document.getElementById('spd-prixCost');
+    var spdCpl = document.getElementById('spd-cpl');
+    var spdProfitMargin = document.getElementById('spd-profitMargin');
+    var spdResult = document.getElementById('spd-resultCalcul');
+    function onCalcSalePrice() {
+      var tup = App.getCurrentMarketAndFees(marketsSelect);
+      var fees = tup.fees;
+      var toUSD = function (v) { return App.convertUsingHidden(v, resultHidden, 'toUSD'); };
+      var usdToMkt = function (v) { return App.convertUsingHidden(v, resultHidden, 'fromUSD'); };
+      App.calcSalePrice(spdType, spdPrixCost, spdCpl, spdProfitMargin, spdResult, fees, formErrorSP, usdToMkt);
+    }
+
     App.initMarketsDropdown(marketsSelect);
     App.initCurrencyDropdowns(fromSelect, toSelect);
 
@@ -76,5 +92,7 @@ window.App = window.App || {};
     if (amountInput) amountInput.addEventListener('change', onConvertCurrency);
 
     marketsSelect.addEventListener('change', refreshFeesAndRates);
+    var spdBtn = document.getElementById('spd-calcul-button');
+    if (spdBtn) spdBtn.addEventListener('click', onCalcSalePrice);
   });
 })(window.App);

@@ -200,7 +200,7 @@ button {
   padding: 0.8em 0;
 }
 
-#resultCalcul {
+.resultAll {
   font-size: 1.2em;
   text-align: center;
   margin-top: 1em;
@@ -541,4 +541,63 @@ select.control {
 .tooltip:hover::after,
 .tooltip:hover::before {
   opacity: 1;
+}
+
+/* --- Tabs for sections --- */
+.tabs-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 12px 0 18px;
+}
+
+.tab-btn {
+  appearance: none;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #111827;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.tab-btn.active {
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
+}
+
+.tab-section {
+  display: none;
+}
+
+.tab-section.is-visible {
+  display: block;
+}
+
+.tab-section {
+  display: none !important;
+}
+
+.tab-section.is-visible {
+  display: block !important;
+}
+
+
+/* HARD HIDE tabs unless .is-visible */
+.tab-section[hidden] {
+  display: none !important;
+}
+
+.tab-section {
+  display: none !important;
+  visibility: hidden;
+  height: auto;
+}
+
+.tab-section.is-visible {
+  display: block !important;
+  visibility: visible;
 }

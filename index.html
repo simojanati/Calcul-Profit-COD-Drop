@@ -14,9 +14,9 @@
 <body>
   <div class="feetsCalcul">
     <div class="app-details">
-      <img src="DROP.gif" class="app-icon" alt="COD Drop Profit Calculator" />
-      <h1 class="app-title">Calculate Profit Of Product from COD Drop </h1>
-      <h1 class="app-title"> حساب ربح المنتج من COD Drop</h1>
+
+      <h1 class="app-title">Calculate (Profit Margin/ Sale Price) Product from COD Drop </h1>
+      <h1 class="app-title"> حساب (ثمن البيع /هامش الربح) المنتج من COD Drop</h1>
     </div>
     <label for="market">Market:</label>
     <div class="dropdowns">
@@ -33,9 +33,9 @@
       </colgroup>
       <tr>
         <th></th>
-        <th>مركز الاتصال Call Center</th>
-        <th>الشحن Shipping</th>
-        <th>رسوم الدفع عند الاستلام COD Fees</th>
+        <th>مركز الاتصال Call Center (CCD)</th>
+        <th>الشحن Shipping (CH)</th>
+        <th>رسوم الدفع عند الاستلام (COD)</th>
       </tr>
       <tr>
         <th scope="row">محسوب Calculated</th>
@@ -50,76 +50,144 @@
         <td id="codFeesExtra" style="direction: ltr;"></td>
       </tr>
     </table>
+    <div class="tabs-actions">
+      <button id="tab-profit" class="tab-btn" type="button">Profit</button>
+      <button id="tab-saleprice" class="tab-btn active" type="button">Sale Price</button>
+    </div>
+
     <br>
-    <div class="wrap">
-      <h1 style="text-align: center;">المرجو إدخال معلوماتك في الخانات أسفله</h1><br>
-      <div class="grid">
-        <!-- 1) Type Product (dropdown) -->
-        <div class="field">
-          <label for="type">اختر الفئة: Gadget أو Cosmetict</label>
-          <select id="type" name="type" class="control" required>
-            <option value="" disabled selected>اختر نوع…</option>
-            <option value="Gadget">Gadget</option>
-            <option value="Cosmetic">Cosmetic</option>
-          </select>
-          <div class="muted">Product Type</div>
-        </div>
-
-        <!-- 2) prix vente (decimal + SAR suffix on right) -->
-        <div class="field">
-          <label for="salePrice">سعر البيع </label>
-          <div class="affix">
-            <input id="salePrice" name="salePrice" class="control" type="number" inputmode="decimal" step="0.01" min="0"
-              placeholder="0.00" dir="ltr" required />
-            <span class="suffix" id="currencyMarket">SAR</span>
+    <section id="profit-drop-section" class="tab-section is-visible">
+      <div class="wrap">
+        <h1 style="text-align: center;"><b>هامش الربح Profit Margin</b></h1>
+        <h3 style="text-align: center;">المرجو إدخال معلوماتك في الخانات أسفله</h3><br>
+        <div class="grid">
+          <!-- 1) Type Product (dropdown) -->
+          <div class="field">
+            <label for="type">اختر الفئة: Gadget أو Cosmetict</label>
+            <select id="type" name="type" class="control" required>
+              <option value="" disabled selected>اختر نوع…</option>
+              <option value="Gadget">Gadget</option>
+              <option value="Cosmetic">Cosmetic</option>
+            </select>
+            <div class="muted">Product Type</div>
           </div>
-          <div class="muted">Sale Price</div>
-        </div>
 
-        <!-- 3) Profit margin (decimal + $ suffix) -->
-        <div class="field">
-          <label for="profitMargin">تكلفة غير المتوقعة </label>
-          <div class="affix">
-            <input id="profitMargin" name="profitMargin" class="control" type="number" inputmode="decimal" step="0.01"
-              min="0" placeholder="0.00" value="15" dir="ltr" required />
-            <span class="suffix">%</span>
+          <!-- 2) prix vente (decimal + SAR suffix on right) -->
+          <div class="field">
+            <label for="salePrice">سعر البيع (SP)</label>
+            <div class="affix">
+              <input id="salePrice" name="salePrice" class="control" type="number" inputmode="decimal" step="0.01"
+                min="0" placeholder="0.00" dir="ltr" required />
+              <span class="suffix" id="currencyMarket">SAR</span>
+            </div>
+            <div class="muted">Sale Price</div>
           </div>
-          <div class="muted">Cost Unexpected</div>
-        </div>
 
-        <!-- 4) Prix Cost (decimal + $ suffix) -->
-        <div class="field">
-          <label for="prixCost">تكلفة الشراء</label>
-          <div class="affix">
-            <input id="prixCost" name="prixCost" class="control" type="number" inputmode="decimal" step="0.01" min="0"
-              placeholder="0.00" dir="ltr" required />
-            <span class="suffix">$</span>
+          <!-- 3) Profit margin (decimal + $ suffix) -->
+          <div class="field">
+            <label for="profitMargin">تكلفة غير المتوقعة (CU)</label>
+            <div class="affix">
+              <input id="profitMargin" name="profitMargin" class="control" type="number" inputmode="decimal" step="0.01"
+                min="0" placeholder="0.00" value="15" dir="ltr" required />
+              <span class="suffix">%</span>
+            </div>
+            <div class="muted">Cost Unexpected</div>
           </div>
-          <div class="muted">Cost Price</div>
-        </div>
 
-        <!-- 5) CPL (decimal + $ suffix) -->
-        <div class="field row-span-2">
-          <label for="cpl">التكلفة لكل عميل محتمل</label>
-          <div class="affix">
-            <input id="cpl" name="cpl" class="control" type="number" inputmode="decimal" step="0.01" min="0"
-              placeholder="0.00" dir="ltr" required />
-            <span class="suffix">$</span>
+          <!-- 4) Prix Cost (decimal + $ suffix) -->
+          <div class="field">
+            <label for="prixCost">تكلفة الشراء (CP)</label>
+            <div class="affix">
+              <input id="prixCost" name="prixCost" class="control" type="number" inputmode="decimal" step="0.01" min="0"
+                placeholder="0.00" dir="ltr" required />
+              <span class="suffix">$</span>
+            </div>
+            <div class="muted">Cost Price</div>
           </div>
-          <div class="muted">CPL</div>
+
+          <!-- 5) CPL (decimal + $ suffix) -->
+          <div class="field">
+            <label for="cpl">التكلفة لكل عميل محتمل (CPL)</label>
+            <div class="affix">
+              <input id="cpl" name="cpl" class="control" type="number" inputmode="decimal" step="0.01" min="0"
+                placeholder="0.00" dir="ltr" required />
+              <span class="suffix">$</span>
+            </div>
+            <div class="muted">CPL</div>
+          </div>
         </div>
       </div>
-    </div>
-    <p id="formError" class="error" aria-live="polite" hidden></p>
-    <button id="calcul-button">احسب Calculate </button>
-    <p id="resultDesc" style="text-align: center;font-size: 14px;"><b>Profit = SP - (CCD + SH + COD + CU +
-        (CPL x 3))</b></p>
-    <p id="resultDescExp" style="font-size: 11px;" dir="ltr"><b>SP</b> (Sale Price) - <b>CCD</b> (Fees Call Center G/C
-      Delivered) - <b>SH</b>
-      (Fees Shipping Delivered) - <b>COD</b> (Fees COD: % of SP) - <b>CU</b> (Cost Unexpected: Return, call center lead
-      ... Not
-      calculated in table) - <b>CPL</b> (Cost Per Lead: x3 days for test)</b></p>
-    <p id="resultCalcul">الربح Profit = 00 $ || 00 MAD</p>
+      <p id="formError1" class="error" aria-live="polite" hidden></p>
+      <button id="calcul-button">احسب Calculate </button>
+      <p id="resultDesc" style="text-align: center;font-size: 14px;"><b>Profit = SP - (CCD + SH + COD + CU +
+          (CPL x 3))</b></p>
+      <p id="resultDescExp" style="font-size: 11px;" dir="ltr"><b>SP</b> (Sale Price) - <b>CCD</b> (Fees Call Center G/C
+        Delivered) - <b>SH</b>
+        (Fees Shipping Delivered) - <b>COD</b> (Fees COD: % of SP) - <b>CU</b> (Cost Unexpected: Return, call center
+        lead
+        ... Not
+        calculated in table) - <b>CPL</b> (Cost Per Lead: x3 days for test)</b></p>
+      <p id="resultCalcul" class="resultAll">الربح Profit = 00 $ || 00 MAD</p>
+
+    </section>
+
+    <section id="sale-price-drop-section" class="tab-section" hidden>
+      <div class="wrap">
+        <h1 style="text-align: center;"><b>سعر البيع Sale Price</b></h1>
+        <h3 style="text-align: center;">المرجو إدخال معلوماتك في الخانات أسفله</h3><br>
+        <div class="grid">
+          <div class="field">
+            <label for="spd-type">اختر الفئة: Gadget أو Cosmetic</label>
+            <select id="spd-type" name="spd-type" class="control" required>
+              <option value="" disabled selected>اختر نوع…</option>
+              <option value="Gadget">Gadget</option>
+              <option value="Cosmetic">Cosmetic</option>
+            </select>
+            <div class="muted">Product Type</div>
+          </div>
+          <div class="field">
+            <label for="spd-prixCost">تكلفة الشراء (CP)</label>
+            <div class="affix">
+              <input id="spd-prixCost" name="spd-prixCost" class="control" type="number" inputmode="decimal" step="0.01"
+                min="0" placeholder="0.00" dir="ltr" required />
+              <span class="suffix">$</span>
+            </div>
+            <div class="muted">Cost Price</div>
+          </div>
+          <div class="field">
+            <label for="spd-cpl">التكلفة لكل عميل محتمل (CPL)</label>
+            <div class="affix">
+              <input id="spd-cpl" name="spd-cpl" class="control" type="number" inputmode="decimal" step="0.01" min="0"
+                placeholder="0.00" dir="ltr" required />
+              <span class="suffix">$</span>
+            </div>
+            <div class="muted">Cost Per Lead</div>
+          </div>
+          <div class="field">
+            <label for="spd-profitMargin">هامش الربح (PM)</label>
+            <div class="affix">
+              <input id="spd-profitMargin" name="spd-profitMargin" class="control" type="number" inputmode="decimal"
+                step="0.01" min="0" placeholder="0.00" dir="ltr" required />
+              <span class="suffix">$</span>
+            </div>
+            <div class="muted">Profit Margin</div>
+          </div>
+        </div>
+      </div>
+      <p id="formError2" class="error" aria-live="polite" hidden></p>
+      <button id="spd-calcul-button" type="button">حساب الثمن (Sale Price Drop)</button>
+      <p id="resultDesc" style="text-align: center;font-size: 14px;"><b>Sale Price = CCD + SH + PM +
+          (CPL x 3) + COD</b></p>
+      <p id="resultDescExp" style="font-size: 11px;" dir="ltr"><b>SP</b> (Sale Price) - <b>CCD</b> (Fees Call Center G/C
+        Delivered) - <b>SH</b>
+        (Fees Shipping Delivered) - <b>PM</b> (Profit margin) - <b>CPL</b> (Cost Per Lead: x3 days for test)</b> -
+        <b>COD</b> (Fees COD: % of SP(CCD + SH + PM +
+        (CPL x 3)))
+      </p>
+      <p id="spd-resultCalcul" class="resultAll" aria-live="polite" dir="ltr">Sale Price = 00 $ || 00 <span
+          id="currencyResultCalculSale"></span></p>
+
+    </section>
   </div>
   <div class="wrapper">
     <div class="app-details">
@@ -142,6 +210,7 @@
     <input id="madHidden" name="madHidden" type="hidden" value="0" />
   </div>
 
+
   <footer class="site-footer" dir="ltr">
     <p>
       <a class="tooltip" href="https://lmofidclub.com/social" target="_blank" rel="noopener" data-tip="Lmofid+">
@@ -157,7 +226,83 @@
         <img src="./favicon.png" alt="Fees COD Drop" class="footer-icon">
       </a>
     </p>
+
+
   </footer>
+
+
+  <script>
+    (function () {
+      var btnProfit = document.getElementById('tab-profit');
+      var btnSale = document.getElementById('tab-saleprice');
+      var secProfit = document.getElementById('profit-drop-section');
+      var secSale = document.getElementById('sale-price-drop-section');
+      if (!btnProfit || !btnSale || !secProfit || !secSale) return;
+      function show(which) {
+        if (which === 'profit') {
+          secProfit.removeAttribute('hidden'); secProfit.classList.add('is-visible');
+          secSale.classList.remove('is-visible'); secSale.setAttribute('hidden', '');
+          btnProfit.classList.add('active'); btnSale.classList.remove('active');
+        } else {
+          secSale.removeAttribute('hidden'); secSale.classList.add('is-visible');
+          secProfit.classList.remove('is-visible'); secProfit.setAttribute('hidden', '');
+          btnSale.classList.add('active'); btnProfit.classList.remove('active');
+        }
+        var ta = document.querySelector('.tabs-actions'); if (ta) { ta.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      }
+      btnProfit.addEventListener('click', function () { show('profit'); });
+      btnSale.addEventListener('click', function () { show('sale'); });
+    })();
+  </script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var secProfit = document.getElementById('profit-drop-section');
+      var secSale = document.getElementById('sale-price-drop-section');
+      var btnProfit = document.getElementById('tab-profit');
+      var btnSale = document.getElementById('tab-saleprice');
+      if (secProfit && secSale) {
+        secSale.classList.add('is-visible'); secSale.removeAttribute('hidden');
+        secProfit.classList.remove('is-visible'); secProfit.setAttribute('hidden', '');
+      }
+      if (btnProfit && btnSale) {
+        btnSale.classList.add('active'); btnProfit.classList.remove('active');
+      }
+    });
+  </script>
+
+
+  <script>
+    (function () {
+      function setTab(which) {
+        var btnProfit = document.getElementById('tab-profit');
+        var btnSale = document.getElementById('tab-saleprice');
+        var secProfit = document.getElementById('profit-drop-section');
+        var secSale = document.getElementById('sale-price-drop-section');
+        if (!btnProfit || !btnSale || !secProfit || !secSale) return;
+        if (which === 'profit') {
+          secProfit.classList.add('is-visible'); secProfit.removeAttribute('hidden');
+          secSale.classList.remove('is-visible'); secSale.setAttribute('hidden', '');
+          btnProfit.classList.add('active'); btnSale.classList.remove('active');
+        } else {
+          secSale.classList.add('is-visible'); secSale.removeAttribute('hidden');
+          secProfit.classList.remove('is-visible'); secProfit.setAttribute('hidden', '');
+          btnSale.classList.add('active'); btnProfit.classList.remove('active');
+        }
+      }
+      // Init after DOM ready
+      document.addEventListener('DOMContentLoaded', function () {
+        setTab('sale');
+        var btnProfit = document.getElementById('tab-profit');
+        var btnSale = document.getElementById('tab-saleprice');
+        if (btnProfit) btnProfit.addEventListener('click', function () { setTab('profit'); });
+        if (btnSale) btnSale.addEventListener('click', function () { setTab('sale'); });
+      });
+      // Expose for debugging
+      window.__setTab = setTab;
+    })();
+  </script>
 
   <!-- Script -->
   <script src="./js/currency-codes.js"></script>

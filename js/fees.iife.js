@@ -15,7 +15,7 @@ window.App = window.App || {};
     return { market: market, fees: fees };
   };
 
-  App.renderFeesUI = function (fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarketEl) {
+  App.renderFeesUI = function (fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarketEl, currencyResultCalculSale) {
     if (!fees || !market) return;
     const extraFees = listOfFeesNotCalculed.find(p => p.feesID === fees.feesID);
     var currencyLogo = '$';
@@ -26,8 +26,6 @@ window.App = window.App || {};
     callCenterFees.innerHTML = '<b>Gadgets = ' + fees.gadgetCallCenter + ' (' + currencyLogo + ') <bR>Cosmetics = ' + fees.cosmeticCallCenter + ' (' + currencyLogo + ')';
     shippingFees.innerHTML = '<b>' + fees.ship + ' (' + currencyLogo + ')</b>';
     codFees.innerHTML = '<b>' + (fees.codFees * 100) + ' %</b>';
-
-    console.log(currencyLogo);
     callCenterExtra.innerHTML = '' + codeTbleFeeds + '<tr>' +
       '  <th style="text-align:left; padding:8px 10px; font-weight:600; font-size:8px;">Gadgets</th>' +
       '  <td style="text-align:center; padding:8px 10px;">' +
@@ -50,7 +48,11 @@ window.App = window.App || {};
 
     shippingExtra.innerHTML = extraFees.returnShip + ' (' + currencyLogo + ')';
     codFeesExtra.innerHTML = extraFees.fulfillement > 0 ? 'Fulfillement : ' + extraFees.fulfillement + ' (' + currencyLogo + ')' : 'X';
-    if (currencyMarketEl) currencyMarketEl.innerHTML = market.currency || '';
+
+    if (currencyMarketEl) {
+      currencyMarketEl.innerHTML = market.currency || '';
+      currencyResultCalculSale.innerHTML = market.currency || '';
+    }
   };
 
   App.calculProfit = function (
@@ -73,11 +75,11 @@ window.App = window.App || {};
       errorEl.setAttribute('hidden', '');
     }
 
-
-    if (!typeEl.value || !salePriceEl.value || !profitMarginEl.value || !prixCostEl.value || !cplEl.value) {
+    if (!salePriceEl.value || !profitMarginEl.value || !prixCostEl.value || !cplEl.value) {
       showErr('عَمِّر الحقول المطلوبة من فضلك');
       return;
     }
+    if (!typeEl.value) { showErr('اختَر نوع المنتج من فضلك'); return; }
     clearErr();
 
     var saleUSD = convertToUSD(salePriceEl.value);
@@ -123,5 +125,57 @@ window.App = window.App || {};
       resultCalculEl.innerHTML = 'Profit = 00 $ || 00 MAD';
     }
 
+  };
+})(window.App);
+
+
+window.App = window.App || {};
+(function (App) {
+  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, fees, errorEl, convertFromUSDToMarket) {
+    function showErr(msg) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.removeAttribute('hidden');
+      errorEl.classList.add('show');
+    }
+    function clearErr() {
+      if (!errorEl) return;
+      errorEl.textContent = '';
+      errorEl.classList.remove('show');
+      errorEl.setAttribute('hidden', '');
+    }
+
+
+    if (!prixCostEl.value || !cplEl.value || !profitMarginEl.value) {
+      showErr('عَمِّر الحقول المطلوبة من فضلك');
+      return;
+    }
+    if (!typeEl.value) { showErr('اختَر نوع المنتج من فضلك'); return; }
+    clearErr();
+
+    var type = (typeEl && typeEl.value) || '';
+    var cp_usd = Number(prixCostEl.value);
+    var cpl_usd = Number(cplEl.value);
+    var pm_usd = Number(profitMarginEl.value);
+    var base_call = 0;
+    if (type === 'Gadget') base_call = Number(fees.gadgetCallCenter || 0);
+    else if (type === 'Cosmetic' || type === 'Cosmitic') base_call = Number(fees.cosmeticCallCenter || 0);
+    var base_ship = Number(fees.ship || 0);
+    var codPct = Number(fees.codFees || 0); // e.g., 0.06 for 6%
+    var base_sum = base_call + base_ship + cp_usd + (cpl_usd * 3) + pm_usd;
+
+    var denom = (1 - codPct);
+    if (denom <= 0) { denom = 1; } // safety
+
+    var sale_usd = base_sum / denom;
+
+    var sale_market = Number(convertFromUSDToMarket(sale_usd));
+
+    if (resultEl) {
+      var cur = (document.getElementById('currencyMarket') && document.getElementById('currencyMarket').textContent) || '';
+      resultEl.style.backgroundColor = '#27ae60';
+      resultEl.style.color = '#fff';
+      resultEl.textContent = 'Sale Price = ' + sale_usd.toFixed(2) + ' $ || ' + sale_market.toFixed(2) + ' ' + cur;
+    }
   };
 })(window.App);
