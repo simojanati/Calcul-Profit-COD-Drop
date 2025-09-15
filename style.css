@@ -120,6 +120,34 @@ body {
   }
 }
 
+.app-iconCC {
+  width: 30%;
+}
+
+.app-iconD {
+  width: 15%;
+}
+
+@media (max-width:1530px) {
+  .app-iconCC {
+    width: 35%;
+  }
+
+  .app-iconD {
+    width: 40%;
+  }
+}
+
+@media (max-width:600px) {
+  .app-iconCC {
+    width: 100%;
+  }
+
+  .app-iconD {
+    width: 100%;
+  }
+}
+
 .app-details {
   display: flex;
   align-items: center;
