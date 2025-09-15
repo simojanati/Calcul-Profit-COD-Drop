@@ -44,10 +44,10 @@ body {
   gap: 16px;
 }
 
-@media (max-width:700px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width:700px){
+  .grid { grid-template-columns: 1fr; }
+}
+
 }
 
 
@@ -170,7 +170,6 @@ input#amount:focus {
 .dropdowns {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1em;
 }
 
@@ -328,4 +327,131 @@ button { cursor: pointer; }
   text-align: right;                               /* العنوان الجانبي يمين */
   background: #f8fafc;                             /* تمييز خفيف */
   font-weight: 600; color: #111827; white-space: nowrap;
+}
+
+
+
+/* === Responsive patch (non-breaking) === */
+
+/* Place the two main cards side-by-side on large screens, stack on small */
+body{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 1.5rem;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+/* Keep existing card widths but ensure they don't overflow */
+.feetsCalcul, .wrapper{
+  min-width: 260px;
+}
+
+/* Make overflowing tables scroll horizontally on small screens */
+@media (max-width: 768px){
+  .table-scroll, table{
+    display:block;
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fees-table th, .fees-table td{
+    white-space: nowrap;
+  }
+}
+
+/* Prevent long words/values from breaking layout */
+.content, .grid, .feetsCalcul, .wrapper, table{
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+/* Ensure images scale within cards */
+img, video, canvas{
+  max-width:100%;
+  height:auto;
+}
+
+/* Better tap targets on mobile */
+button, .btn, input.control, select.control{
+  min-height: 44px;
+}
+
+/* Keep suffix chips aligned in narrow widths */
+.affix .suffix{
+  white-space:nowrap;
+}
+
+
+
+
+/* --- Responsive enhancements (patch v2) --- */
+
+/* Stack form fields on mobile cleanly */
+@media (max-width: 768px){
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Make the fees table horizontally scrollable on small screens */
+@media (max-width: 768px){
+  .fees-table{
+    display: block;              /* allow scrolling */
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fees-table tr, .fees-table th, .fees-table td{
+    white-space: nowrap;         /* prevent wrapping that breaks columns */
+  }
+}
+
+/* Optional: keep main sections stacked with spacing on mobile */
+@media (max-width: 768px){
+  body{ gap: 1rem; }
+}
+
+
+
+/* === Mobile stacking fix for form fields (v3) === */
+@media (max-width: 768px){
+  /* one column grid for the form */
+  .grid { grid-template-columns: 1fr !important; gap: 12px; }
+
+  /* ensure each field takes full row */
+  .field { width: 100%; min-width: 0; }
+
+  /* neutralize any spanning on mobile */
+  .row-span-2 { grid-column: auto !important; }
+
+  /* make inputs comfy and avoid overlap with suffix */
+  .affix .control { width: 100%; }
+  .affix .suffix { right: 8px; }
+
+  /* optional: stack actions if they exist */
+  .actions { flex-direction: column; gap: 10px; align-items: stretch; }
+}
+
+
+
+/* === Currency dropdown row: keep labels intact, let selects shrink === */
+.dropdowns.conv-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.dropdowns.conv-row label{
+  white-space: nowrap;      /* ما يتقسّمش النص (من / إلى) */
+  font-weight: 600;
+}
+.dropdowns.conv-row select{
+  flex: 0 1 160px;          /* يخلي السيلكت يصغَر عند الحاجة */
+  min-width: 120px;
+  max-width: 100%;
+}
+@media (max-width: 768px){
+  .dropdowns.conv-row select{ flex-basis: 130px; min-width: 110px; }
+}
+@media (max-width: 420px){
+  .dropdowns.conv-row select{ flex-basis: 110px; }
 }
