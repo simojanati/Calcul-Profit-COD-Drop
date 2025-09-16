@@ -46,8 +46,8 @@ window.App = window.App || {};
       '</tr>' +
       '</table>';
 
-    shippingExtra.innerHTML = extraFees.returnShip + ' (' + currencyLogo + ')';
-    codFeesExtra.innerHTML = extraFees.fulfillement > 0 ? 'Fulfillement : ' + extraFees.fulfillement + ' (' + currencyLogo + ')' : 'X';
+    shippingExtra.innerHTML = 'Returned : ' + extraFees.returnShip + ' (' + currencyLogo + ')';
+    codFeesExtra.innerHTML = extraFees.fulfillement > 0 ? 'Fulfillement : ' + extraFees.fulfillement + ' (' + currencyLogo + ')' : 'Fulfillement : X';
 
     if (currencyMarketEl) {
       currencyMarketEl.innerHTML = market.currency || '';
