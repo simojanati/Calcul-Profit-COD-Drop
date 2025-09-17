@@ -15,7 +15,7 @@ window.App = window.App || {};
     return { market: market, fees: fees };
   };
 
-  App.renderFeesUI = function (fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarketEl, currencyResultCalculSale) {
+  App.renderFeesUI = function (fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarketEl, currencyResultCalculSale, currencyResultCalculSale2, currencyResultCalculSale3) {
     if (!fees || !market) return;
     const extraFees = listOfFeesNotCalculed.find(p => p.feesID === fees.feesID);
     var currencyLogo = '$';
@@ -52,6 +52,8 @@ window.App = window.App || {};
     if (currencyMarketEl) {
       currencyMarketEl.innerHTML = market.currency || '';
       currencyResultCalculSale.innerHTML = market.currency || '';
+      currencyResultCalculSale2.innerHTML = market.currency || '';
+      currencyResultCalculSale3.innerHTML = market.currency || '';
     }
   };
 
@@ -108,7 +110,6 @@ window.App = window.App || {};
       var riskMargin = (Number(profitMarginEl.value) / 100) * Number(saleUSD);
       var feesAll = feesCost + triplCpl + riskMargin;
       totalProfit = Number(saleUSD) - feesAll;
-      console.log(totalProfit);
       profitMad = convertFromUSDToMAD(totalProfit);
     }
     if (totalProfit > 0) {
@@ -131,7 +132,7 @@ window.App = window.App || {};
 
 window.App = window.App || {};
 (function (App) {
-  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, fees, errorEl, convertToUSD, convertFromUSDToMarket) {
+  App.calcSalePrice = function (typeEl, prixCostEl, cplEl, profitMarginEl, resultEl, resultEl2x3x, fees, errorEl, convertToUSD, convertFromUSDToMarket) {
     function showErr(msg) {
       if (!errorEl) return;
       errorEl.textContent = msg;
@@ -174,14 +175,22 @@ window.App = window.App || {};
     if (denom <= 0) { denom = 1; } // safety
 
     var sale_usd = base_sum / denom;
+    var sale_usd_x2 = sale_usd + cp_usd + pm_usd;
+    var sale_usd_x3 = sale_usd_x2 + cp_usd + pm_usd;
+
+    var pourcent2 = Math.round(100 - ((sale_usd_x2 * 100) / (sale_usd * 2)));
+    var pourcent3 = Math.round(100 - ((sale_usd_x3 * 100) / (sale_usd * 3)));
 
     var sale_market = Number(convertFromUSDToMarket(sale_usd));
+    var sale2_market = Number(convertFromUSDToMarket(sale_usd_x2));
+    var sale3_market = Number(convertFromUSDToMarket(sale_usd_x3));
 
     if (resultEl) {
       var cur = (document.getElementById('currencyMarket') && document.getElementById('currencyMarket').textContent) || '';
       resultEl.style.backgroundColor = '#27ae60';
       resultEl.style.color = '#fff';
-      resultEl.textContent = 'Sale Price = ' + sale_usd.toFixed(2) + ' $ || ' + sale_market.toFixed(2) + ' ' + cur + ' = سعر البيع ';
+      resultEl.textContent = ' 1x Sale Price = ' + sale_usd.toFixed(2) + ' $ || ' + sale_market.toFixed(2) + ' ' + cur + ' = سعر البيع x1';
+      resultEl2x3x.textContent = ' 2x Sale Price = ' + sale_usd_x2.toFixed(2) + ' $ (' + pourcent2 + '%) , 3x Sale Price = ' + sale_usd_x3.toFixed(2) + ' $ (' + pourcent3 + '%) || (' + pourcent2 + '%) ' + sale2_market.toFixed(2) + ' ' + cur + ' = سعر البيع x2, (' + pourcent3 + '%) ' + sale3_market.toFixed(2) + ' ' + cur + ' = سعر البيع x3';
     }
   };
 })(window.App);
