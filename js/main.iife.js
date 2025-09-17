@@ -26,6 +26,8 @@ window.App = window.App || {};
   var cpl = document.getElementById('cpl');
   var resultCalcul = document.getElementById('resultCalcul');
   var currencyResultCalculSale = document.getElementById('currencyResultCalculSale');
+  var currencyResultCalculSale2 = document.getElementById('currencyResultCalculSale2');
+  var currencyResultCalculSale3 = document.getElementById('currencyResultCalculSale3');
   var formErrorP = document.getElementById('formError1');
   var formErrorSP = document.getElementById('formError2');
 
@@ -33,7 +35,7 @@ window.App = window.App || {};
     var tup = App.getCurrentMarketAndFees(marketsSelect);
     var market = tup.market, fees = tup.fees;
 
-    App.renderFeesUI(fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarket, currencyResultCalculSale);
+    App.renderFeesUI(fees, market, callCenterFees, callCenterExtra, shippingFees, shippingExtra, codFees, codFeesExtra, currencyMarket, currencyResultCalculSale, currencyResultCalculSale2, currencyResultCalculSale3);
 
     App.addMarketCurrencyToHidden(market.currency, resultHidden).catch(console.error);
     App.addMadToHidden(madHidden).catch(console.error);
@@ -64,12 +66,14 @@ window.App = window.App || {};
     var spdCpl = document.getElementById('spd-cpl');
     var spdProfitMargin = document.getElementById('spd-profitMargin');
     var spdResult = document.getElementById('spd-resultCalcul');
+    var spdResult2x3x = document.getElementById('spd-resultCalcul2x3x');
+
     function onCalcSalePrice() {
       var tup = App.getCurrentMarketAndFees(marketsSelect);
       var fees = tup.fees;
       var toUSD = function (v) { return App.convertUsingHidden(v, resultHidden, 'toUSD'); };
       var usdToMkt = function (v) { return App.convertUsingHidden(v, resultHidden, 'fromUSD'); };
-      App.calcSalePrice(spdType, spdPrixCost, spdCpl, spdProfitMargin, spdResult, fees, formErrorSP, toUSD, usdToMkt);
+      App.calcSalePrice(spdType, spdPrixCost, spdCpl, spdProfitMargin, spdResult, spdResult2x3x, fees, formErrorSP, toUSD, usdToMkt);
     }
 
     App.initMarketsDropdown(marketsSelect);
